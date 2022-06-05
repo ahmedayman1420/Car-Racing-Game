@@ -1,0 +1,467 @@
+{/*AhmedKhaled6*/
+  "start-scene": "main",
+  "window":
+  {
+      "title":"Default Game Window",
+      "size":{
+          "width":1280,
+          "height":720
+      },
+      "fullscreen": false
+  },
+  "scene": {
+      "renderer":{
+          "sky":"assets/textures/sky2.jpg",
+          "postprocess": "assets/shaders/postprocess/vignette.frag"
+      },
+      "assets":{
+          "shaders":{
+              "tinted":{
+                  "vs":"assets/shaders/tinted.vert",
+                  "fs":"assets/shaders/tinted.frag"
+              },
+              "textured":{
+                  "vs":"assets/shaders/textured.vert",
+                  "fs":"assets/shaders/textured.frag"
+              }, "lit": {
+                "vs": "assets/shaders/light.vert",
+                "fs": "assets/shaders/light.frag"
+            }
+          },
+          "textures":{
+              "glass": "assets/textures/glass-panels.png",
+              "moon": "assets/textures/moon.jpg",
+              "grass": "assets/textures/grass_ground_d.jpg",
+              "road": "assets/textures/roaad.jpg",
+              // "monkey": "assets/textures/monkey.png",
+              "tex1": "assets/textures/Tex_0001_0.png",
+              "text": "assets/textures/menutext.jpg",
+              "healthbar": "assets/textures/healthbar.png",
+              
+              /*TODO_LIGHT*/
+              "monkey": "assets/textures/monkey/albedo.jpg",
+              "car-light": "assets/textures/monkey/Tex_0001_0.png",
+              "heart-light": "assets/textures/monkey/red.jpg",
+              "green-light": "assets/textures/monkey/green.jpg",
+              "blue-light": "assets/textures/monkey/blue.jpg",
+              "black-light": "assets/textures/monkey/black.jpg",
+              "white-light": "assets/textures/monkey/white.jpg",
+              "road-light": "assets/textures/monkey/roaad.jpg",
+              "monkey-specular": "assets/textures/monkey/specular.jpg",
+              "monkey-roughness": "assets/textures/monkey/roughness.jpg",
+              "monkey-ambient_occlusion": "assets/textures/monkey/ambient_occlusion.jpg",
+              "monkey-emissive": "assets/textures/monkey/emissive.jpg"
+
+          },  
+          "meshes":{
+              "plane": "assets/models/plane.obj",
+              "heart": "assets/models/heartObj.obj",
+              "monkey": "assets/models/monkey.obj",
+              "sphere": "assets/models/sphere.obj",
+              "car": "assets/models/car.obj"
+          },
+          "samplers":{
+              "default":{},
+              "pixelated":{
+                  "MAG_FILTER": "GL_NEAREST"
+              }
+          },
+          "materials":{
+              "car":{
+                  "type": "lit",
+                  "shader": "lit",
+                  "pipelineState": {
+                      "faceCulling":{
+                          "enabled": true
+                      },
+                      "depthTesting":{
+                          "enabled": true
+                      },
+                      "blending":{
+                          "enabled": true,
+                          "sourceFactor": "GL_SRC_ALPHA",
+                          "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+                      },
+                      "depthMask": true
+                  },
+                  "transparent": false,
+                  "tint": [1, 1,1, 1],
+                   /*TODO_LIGHT*/
+                   "albedo": "car-light",
+                   "specular": "monkey-specular",
+                   "roughness": "monkey-roughness",
+                   "ambient_occlusion": "monkey-ambient_occlusion",
+                   "emissive": "monkey-emissive",
+                   "sampler": "default"
+              },
+             "health":{
+              "type": "textured",
+              "shader": "textured",
+              "pipelineState": {
+                  "faceCulling":{
+                      "enabled": true
+                  },
+                  "depthTesting":{
+                      "enabled": true
+                  },
+                  "blending":{
+                      "enabled": true,
+                      "sourceFactor": "GL_SRC_ALPHA",
+                      "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+                  },
+                  "depthMask": true
+              },
+              "transparent": false,
+              "tint": [1, 1,1, 1],
+              "texture": "healthbar",
+              "sampler": "pixelated"
+             },
+              
+              "metal": {
+                  "type": "tinted",
+                  "shader": "tinted",
+                  "pipelineState": {
+                    "faceCulling": { "enabled": false },
+                    "depthTesting": { "enabled": true }
+                  },
+                  "tint": [0.45, 0.4, 0.5, 1]
+                },
+                
+                "red": {
+                  "type": "lit",
+                  "shader": "lit",
+                  "pipelineState": {
+                    "faceCulling": { "enabled": false },
+                    "depthTesting": { "enabled": true }
+                  },
+                  "tint": [1, 0, 0, 1],
+                                     /*TODO_LIGHT*/
+                                     "albedo": "heart-light",
+                                     "specular": "monkey-specular",
+                                     "roughness": "monkey-roughness",
+                                     "ambient_occlusion": "monkey-ambient_occlusion",
+                                     "emissive": "monkey-emissive",
+                                     "sampler": "default"
+                },
+                "green": {
+                  "type": "lit",
+                  "shader": "lit",
+                  "pipelineState": {
+                    "faceCulling": { "enabled": false },
+                    "depthTesting": { "enabled": true }
+                  },
+                  "tint": [0, 1, 0, 1],
+                                     /*TODO_LIGHT*/
+                                     "albedo": "green-light",
+                                     "specular": "monkey-specular",
+                                     "roughness": "monkey-roughness",
+                                     "ambient_occlusion": "monkey-ambient_occlusion",
+                                     "emissive": "monkey-emissive",
+                                     "sampler": "default"
+                },
+                "blue": {
+                  "type": "lit",
+                  "shader": "lit",
+                  "pipelineState": {
+                    "faceCulling": { "enabled": false },
+                    "depthTesting": { "enabled": true }
+                  },
+                  "tint": [0, 0, 1, 1],
+                                     /*TODO_LIGHT*/
+                                     "albedo": "blue-light",
+                                     "specular": "monkey-specular",
+                                     "roughness": "monkey-roughness",
+                                     "ambient_occlusion": "monkey-ambient_occlusion",
+                                     "emissive": "monkey-emissive",
+                                     "sampler": "default"
+                },
+                "white": {
+                  "type": "lit",
+                  "shader": "lit",
+                  "pipelineState": {
+                    "faceCulling": { "enabled": false },
+                    "depthTesting": { "enabled": true }
+                  },
+                  "tint": [1, 1, 1, 1],
+                                     /*TODO_LIGHT*/
+                                     "albedo": "white-light",
+                                     "specular": "monkey-specular",
+                                     "roughness": "monkey-roughness",
+                                     "ambient_occlusion": "monkey-ambient_occlusion",
+                                     "emissive": "monkey-emissive",
+                                     "sampler": "default"
+                },
+                "black": {
+                  "type": "lit",
+                  "shader": "lit",
+                  "pipelineState": {
+                    "faceCulling": { "enabled": false },
+                    "depthTesting": { "enabled": true }
+                  },
+                  "tint": [0, 0, 0, 1],                   /*TODO_LIGHT*/
+                  "albedo": "black-light",
+                  "specular": "monkey-specular",
+                  "roughness": "monkey-roughness",
+                  "ambient_occlusion": "monkey-ambient_occlusion",
+                  "emissive": "monkey-emissive",
+                  "sampler": "default"
+                },
+                "road": {
+                  "type": "textured",
+                  "shader": "textured",
+                  "pipelineState": {
+                    "faceCulling": { "enabled": false },
+                    "depthTesting": { "enabled": true }
+                  },
+                  "tint": [1, 1, 1, 1],
+                  "texture": "road",
+                  "sampler": "default"
+                },"text": {
+                  "type": "textured",
+                  "shader": "textured",
+                  "pipelineState": {
+                    "faceCulling": {
+                      "enabled": false
+                    },
+                    "depthTesting": {
+                      "enabled": true
+                    }
+                  },
+                  "texture": "text",
+                  "sampler": "default"
+                }
+             
+          }
+      },
+      "world": [
+          
+          {
+            "position": [0, 2, 12],
+            "components": [
+              { "type": "Camera" },
+              { "type": "Free Camera Controller", 
+                "linearVelocity": [0, 0, 0],
+                "angularVelocity": [0, 0, 0],
+                "speedSensitivity": -0.5, 
+                "brakeSensitivity":0.5,
+                "maxSpeed":-10,
+                "frictionSensitivity":0.1,
+
+                "rotationSensitivity": 2,
+                "maxRotationAngle": 0.785,
+                "jumpSensitivity": 10,
+                "jumpSpeed":20,
+                "originalY":2
+              }
+            ],
+            "children":[
+              {
+                "position": [0, -2, -3],
+                "rotation": [0, 180, 0],
+                "scale": [0.2, 0.2, 0.2],
+                "name":"car",
+                "components": [
+                  { "type": "Mesh Renderer",
+                    "mesh": "car", "material": "car"
+                  },
+                  { "type": "Collider", "position": [0, 0, 0], "length": 1.8 },
+                  {
+                      "type": "Movement",
+                      "linearVelocity": [0, 0, 0],
+                      "angularVelocity": [0, 0, 0],
+                      "rotationSensitivity": 2,
+                      "maxRotationAngle": 0.785
+                  }
+                ]
+              },
+              {
+                "position": [-1.8, 2.5, -3],
+                "rotation": [0, 0, 0],
+                "scale": [0.06, 0.04,0.1],
+                "name":"healthbar",
+                "components": [
+                  { "type": "Mesh Renderer",
+                    "mesh": "plane", "material": "red"
+                  }
+                ]
+              },
+              {
+                "position": [-1.95, 2.5, -3],
+                "rotation": [0, 0, 0],
+                "scale": [0.06, 0.04,0.1],
+                "name":"healthbar",
+                "components": [
+                  { "type": "Mesh Renderer",
+                    "mesh": "plane", "material": "red"
+                  }
+                ]
+              },
+              {
+                "position": [-2.1, 2.5, -3],
+                "rotation": [0, 0, 0],
+                "scale": [0.06, 0.04,0.1],
+                "name":"healthbar",
+                "components": [
+                  { "type": "Mesh Renderer",
+                    "mesh": "plane", "material": "red"
+                  }
+                ]
+              },
+              {
+                "position": [-2.25, 2.5, -3],
+                "rotation": [0, 0, 0],
+                "scale": [0.06, 0.04,0.1],
+                "name":"healthbar",
+                "components": [
+                  { "type": "Mesh Renderer",
+                    "mesh": "plane", "material": "red"
+                  }
+                ]
+              },
+              {
+                "position": [-2.4, 2.5, -3],
+                "rotation": [0, 0, 0],
+                "scale": [0.06, 0.04,0.1],
+                "name":"healthbar",
+                "components": [
+                  { "type": "Mesh Renderer",
+                    "mesh": "plane", "material": "red"
+                  }
+                ]
+              },
+              {
+                "position": [-2.55, 2.5, -3],
+                "rotation": [0, 0, 0],
+                "scale": [0.06, 0.04,0.1],
+                "name":"healthbar",
+                "components": [
+                  { "type": "Mesh Renderer",
+                    "mesh": "plane", "material": "red"
+                  }
+                ]
+              },
+              {
+                "position": [-2.7, 2.5, -3],
+                "rotation": [0, 0, 0],
+                "scale": [0.06, 0.04,0.1],
+                "name":"healthbar",
+                "components": [
+                  { "type": "Mesh Renderer",
+                    "mesh": "plane", "material": "red"
+                  }
+                ]
+              }
+            ]
+          },
+          /*TODO_LIGHT*/
+          {  "name":"light",
+           "position": [0, 10, 10],
+            "rotation": [0, 0, 0],
+            "components": [
+                {
+                    "type": "Light",
+                    "lightType": 1,
+                    "attenuation": [0, 0.2, 0],
+                    "cone_angles":[0, 40],
+                    "diffuse": [0,0,1],
+                    "specular": [0,0,1],
+                    "ambient": [0.1,0.1,0.1]
+                }
+            ]
+        }
+        ,{  "name":"light",
+            "position": [0, 10, -10],
+            "rotation": [0, 0, 0],
+            "components": [
+                {
+                    "type": "Light",
+                    "lightType": 0,
+                    "attenuation": [0, 0.1, 0],
+                    "cone_angles":[0, 40],
+                    "diffuse": [0,1,0],
+                    "specular": [0,1,0],
+                    "ambient": [0.2,0.2,0.2]
+                }
+            ]
+        }
+        ,{  "name":"light",
+            "position": [-10, 10, 0],
+            "rotation": [0, 0, 0],
+            "components": [
+                {
+                    "type": "Light",
+                    "lightType": 1,
+                    "attenuation": [0, 0.2, 0.2],
+                    "cone_angles":[0, 40],
+                    "diffuse": [1,0,0],
+                    "specular": [1,0,0],
+                    "ambient": [0.1,0.1,0.1]
+                }
+            ]
+        }
+
+        ,{  "name":"light",
+            "position": [10, 10, 0],
+            "rotation": [0, 0, 0],
+            "components": [
+                {
+                    "type": "Light",
+                    "lightType": 0,
+                    "attenuation": [0.1, 0.1, 0.1],
+                    "cone_angles":[0, 40],
+                    "diffuse": [0.5,0.5,0.5],
+                    "specular": [0.5,0.5,0.5],
+                    "ambient": [0.1,0.1,0.1]
+                }
+            ]
+        },
+          {
+              "position": [0, -1, 0],
+              "rotation": [-90, -90, 0],
+              "scale": [10000, 10, 10],
+              "name":"road",
+              "components": [
+                { "type": "Mesh Renderer", "mesh": "plane", "material": "road" }
+              ]
+          },
+          {
+            "position": [1, -0.5, 1],
+            "rotation": [0, 0, 0],
+            "scale": [0.3, 0.3, 0.3],
+            "name": "heart",
+            "components": [
+              { "type": "Mesh Renderer", "mesh": "heart", "material": "black" },
+              { "type": "Collider", "position": [0, 0, 0], "length": 1.8 },
+              { "type": "Movement", "angularVelocity": [0, 90, 0] }
+               
+            ]
+          }
+         
+          
+        ],
+          "menu":[
+            {
+              "position": [0, 0, 10],
+              "components": [
+                {
+                  "type": "Camera"
+                },
+                {
+                  "type": "Free Camera Controller"
+                }
+              ]
+            },
+            {
+              "position": [0, 0, 0],
+              "scale": [10, 10, 10],
+              "components": [
+                {
+                  "type": "Mesh Renderer",
+                  "mesh": "plane",
+                  "material": "text"
+                }
+              ]
+            } 
+          ]
+  }
+}

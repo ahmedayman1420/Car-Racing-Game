@@ -1,0 +1,113 @@
+{
+    "start-scene": "car",
+    "window":
+    {
+        "title":"Default Game Window",
+        "size":{
+            "width":1280,
+            "height":720
+        },
+        "fullscreen": false
+    },
+    "scene": {
+        "renderer":{
+            "road":"assets/textures/road.jpg",
+            "postprocess": "assets/shaders/postprocess/vignette.frag"
+        },
+        "assets":{
+            "shaders":{
+                "tinted":{
+                    "vs":"assets/shaders/tinted.vert",
+                    "fs":"assets/shaders/tinted.frag"
+                },
+                "textured":{
+                    "vs":"assets/shaders/textured.vert",
+                    "fs":"assets/shaders/textured.frag"
+                }
+            },
+            "textures":{
+                "tex1": "assets/textures/Tex_0001_0.png",
+                "tex2": "assets/textures/Tex_0002_1.png",
+                "tex3": "assets/textures/Tex_0003_0.png",
+                "tex4": "assets/textures/Tex_0004_1.png",
+                "tex5": "assets/textures/Tex_0005_0.png",
+                "tex6": "assets/textures/Tex_0006_1.png",
+                "tex7": "assets/textures/Tex_0104_0.png"
+
+            },  
+            "meshes":{
+                "car": "assets/models/car.obj"
+            },
+            "samplers":{
+                "default":{},
+                "pixelated":{
+                    "MAG_FILTER": "GL_NEAREST"
+                }
+            },
+            "materials":{
+                "car":{
+                    "type": "textured",
+                    "shader": "textured",
+                    "pipelineState": {
+                        "faceCulling":{
+                            "enabled": true
+                        },
+                        "depthTesting":{
+                            "enabled": true
+                        },
+                        "blending":{
+                            "enabled": true,
+                            "sourceFactor": "GL_SRC_ALPHA",
+                            "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+                        },
+                        "depthMask": true
+                    },
+                    "transparent": false,
+                    "tint": [1, 1,1, 1],
+                    "texture": "tex1",
+                    "sampler": "pixelated"
+                }
+               
+               
+            }
+        },
+        "world":[
+            {
+                "position": [0, 0, 10],
+                "components": [
+                    {
+                        "type": "Camera"
+                    },
+                    {
+                        "type": "Free Camera Controller"
+                    }
+                ],
+                "children":  {
+                 
+                    "scale": [0.1, 0.1, 1.0],
+                    "components": [
+                        {
+                            "type": "Mesh Renderer",
+                            "mesh": "car",
+                            "material": "car"
+                        }
+                    ]
+                }
+            
+                
+            },
+            {
+                "position": [0, 0, 0],
+                "rotation": [-45, 180, 0],
+                "components": [
+                    {
+                        "type": "Mesh Renderer",
+                        "mesh": "car",
+                        "material": "car"
+                    }
+                    
+                ]
+            }
+        ]
+    }
+}
